@@ -21,13 +21,13 @@ class ComposerStaticInitac13594314c7add4c3d4d0bcf2cf5b77
         array (
             'Monolog\\' => 8,
         ),
+        'J' => 
+        array (
+            'Joc4enRatlla\\' => 13,
+        ),
         'D' => 
         array (
             'DeepCopy\\' => 9,
-        ),
-        'A' => 
-        array (
-            'App\\' => 4,
         ),
     );
 
@@ -44,13 +44,13 @@ class ComposerStaticInitac13594314c7add4c3d4d0bcf2cf5b77
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
         ),
+        'Joc4enRatlla\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/App',
+        ),
         'DeepCopy\\' => 
         array (
             0 => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy',
-        ),
-        'App\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src/App',
         ),
     );
 
