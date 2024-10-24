@@ -5,31 +5,31 @@ use Joc4enRatlla\Models\Player;
 use Joc4enRatlla\Models\Game;
 
 
-class GameController
-{
+class GameController {
 private Game $game;
 
 // Request és l'array $_POST
-
 public function __construct($request=null) {
     //Inicialització del joc
-    //isset que recoja el nombre y el color a traves del request del parametro y construya el jugador1 y jugador2 en base a ello. Y dentro del if haga un $tihs->game = new Game(jugador1, jugador2).
-    if(isset($request['nombre'])) {
-        $jugador1 = new Player($request['nombre'], $request['color']);
-        $jugador2 = new Player('Maquinón', 'orange', true);
+    if(isset($request['name'])) {
+        $jugador1 = new Player($request['name'], $request['color']);
+        $jugador2 = new Player('Maquinon', 'orange', true);
         $this->game = new Game($jugador1, $jugador2);
+        $this->game->save();
+    } else {
+        $this->game = Game::restore();
     }
     $this->play($request);
 }
 
 public function play(Array $request)  {
-    // Gestió del joc
-    "...";
+    // TODO : Gestió del joc. Ací es on s'ha de vore si hi ha guanyador, si el que juga es automàtic  o manual, s'ha polsat reiniciar...
+    
+    $this->game->play($request['columna']);
     $board = $this->game->getBoard();
     $players = $this->game->getPlayers();
     $winner = $this->game->getWinner();
     $scores = $this->game->getScores();
-    dd($this);
     loadView('index',compact('board','players','winner','scores'));
 }
 }

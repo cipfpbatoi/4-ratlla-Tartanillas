@@ -2,8 +2,7 @@
 
 namespace Joc4enRatlla\Services;
 
-class Service
-{
+class Service {
     public static function loadView($view, $data = [])
     {
         $viewPath = str_replace('.', '/', $view);

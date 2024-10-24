@@ -6,7 +6,7 @@ class Player {
     private $color;     // Color de les fitxes
     private $isAutomatic; // Forma de jugar (automàtica/manual)
 
-    public function __construct( $name, $color, $isAutomatic = false)  {
+    public function __construct($name, $color, $isAutomatic = false)  {
         $this->name = $name;
         $this->color = $color;
         $this->isAutomatic = $isAutomatic;
