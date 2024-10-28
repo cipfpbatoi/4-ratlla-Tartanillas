@@ -37,60 +37,64 @@ class Game {
 
     //Reinicia el joc
     public function reset(): void {
-        if(isset($_SESSION['partida'])) {
-            unset($_SESSION['partida']);
-        }
+        $this->board = new Board();
+        $this->nextPlayer = 1;
+        $this->winner = null;
     }
     //Realitza un moviment
-    public function play($columna) {
-        if($columna < 0 || $columna >= 7) {
-            echo '<span class="incorrect">Introduce una columna válida.</span>';
-            return false;
+    public function play($columna){
+        // TODO: Realitza un moviment
+        $this->board->setMovementOnBoard($columna, $this->nextPlayer);
+        if ($this->board->checkWin($this->nextPlayer)){
+            $this->winner = $this->players[$this->nextPlayer];
+            $this->scores[$this->nextPlayer]++;
         } else {
-            $this->board->setMovementOnBoard($columna, $this->nextPlayer);
-            $this->nextPlayer = $this->nextPlayer === 1 ? 2 : 1;
+            $this->nextPlayer = ($this->nextPlayer == 1) ? 2 : 1;
         }
-        return true;
+        $this->save();
     }
 
-    public function playAutomatic(){
-        $opponent = $this->nextPlayer === 1 ? 2 : 1;
-
-        for ($col = 1; $col <= Board::COLUMNS; $col++) {
-            if ($this->board->isValidMove($col)) {
-                $tempBoard = clone($this->board);
-                $coord = $tempBoard->setMovementOnBoard(+$col, $this->nextPlayer);
-                if ($tempBoard->checkWin($coord)) {
-                    $this->play($col);
-                    return;
+        public function playAutomatic(){
+            $opponent = $this->nextPlayer === 1 ? 2 : 1;
+    
+            for ($col = 1; $col <= Board::COLUMNS; $col++) {
+                if ($this->board->isValidMove($col)) {
+                    $tempBoard = clone($this->board);
+                    $coord = $tempBoard->setMovementOnBoard($col, $this->nextPlayer);
+    
+                    if ($tempBoard->checkWin($this->nextPlayer)) {
+                        $this->play($col);
+                        return;
+                    }
                 }
             }
-        }
-
-        for ($col = 1; $col <= Board::COLUMNS; $col++) {
-            if ($this->board->isValidMove($col)) {
-                $tempBoard = clone($this->board);
-                $coord = $tempBoard->setMovementOnBoard($col, $opponent);
-                if ($tempBoard->checkWin($coord)) {
-                    $this->play($col);
-                    return;
+    
+            for ($col = 1; $col <= Board::COLUMNS; $col++) {
+                if ($this->board->isValidMove($col)) {
+                    $tempBoard = clone($this->board);
+                    $coord = $tempBoard->setMovementOnBoard($col, $opponent);
+                    if ($tempBoard->checkWin($this->nextPlayer )) {
+                        $this->play($col);
+                        return;
+                    }
                 }
             }
-        }
-
-        $possibles = array();
-        for ($col = 1; $col <= Board::COLUMNS; $col++) {
-            if ($this->board->isValidMove($col)) {
-                $possibles[] = $col;
+    
+            $possibles = array();
+            for ($col = 1; $col <= Board::COLUMNS; $col++) {
+                if ($this->board->isValidMove($col)) {
+                    $possibles[] = $col;
+                }
             }
+            $random = count($possibles)>1?rand(-1,1):0;
+            $middle = (int) (count($possibles) / 2);
+            if (count($possibles) > 1) {
+                $middle = max(0, min(count($possibles) - 1, $middle + $random));
+            }
+            $inthemiddle = $possibles[$middle];
+            $this->play($inthemiddle);
+            return $inthemiddle;            
         }
-        if (count($possibles)>2) {
-            $random = rand(-1,1);
-        }
-        $middle = (int) (count($possibles) / 2)+$random;
-        $inthemiddle = $possibles[$middle];
-        $this->play($inthemiddle);
-    }
     //Guarda l'estat del joc a les sessions
     public function save() {
         $_SESSION['game'] = serialize($this);
@@ -101,6 +105,13 @@ class Game {
             return unserialize($_SESSION['game'], [Game::class]);
         }
         return null;
+    }
+
+    /**
+    * @return int
+    */
+    public function getNextPlayer(): int {
+        return $this->nextPlayer;
     }
 }
 ?>
