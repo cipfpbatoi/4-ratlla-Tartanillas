@@ -32,9 +32,9 @@ public function play(Array $request)  {
             $log = new Logs();
             if (!$jugadorActual->getIsAutomatic() && isset($request['columna'])) {
                 try {
-                $this->game->play($request['columna']);
-                $log ->getLog()->info("El jugador " . $jugadorActual->getName() . " introduce una ficha en la columna: " . $request['columna'] );
-                $this->game->save();
+                    $this->game->play($request['columna']);
+                    $log ->getLog()->info("El jugador " . $jugadorActual->getName() . " introduce una ficha en la columna: " . $request['columna'] );
+                    $this->game->save();
                 } catch(Exception $err) {
                     $log->getLog()->error("Error, columna ". $request['columna']);
                 }

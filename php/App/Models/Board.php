@@ -106,11 +106,7 @@ class Board {
 
     //Comprova si el moviment és vàlid
     public function isValidMove(int $column): bool {
-        if ($column < 1 || $column > self::COLUMNS) {
-            return false;
-        }
-    
-        return true;
+        return $this->slots[1][$column] === 0;
     }
     
     public function isFull(): bool {

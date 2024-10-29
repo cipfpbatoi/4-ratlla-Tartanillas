@@ -1,6 +1,6 @@
 <?php
 namespace Joc4enRatlla\Models;
-
+use Exception;
 use Joc4enRatlla\Models\Board;
 use Joc4enRatlla\Models\Player;
 
@@ -44,6 +44,9 @@ class Game {
     //Realitza un moviment
     public function play($columna){
         // TODO: Realitza un moviment
+        if (!$this->board->isValidMove($columna)){
+            throw new Exception("Movimiento no valido");
+        }
         $this->board->setMovementOnBoard($columna, $this->nextPlayer);
         if ($this->board->checkWin($this->nextPlayer)){
             $this->winner = $this->players[$this->nextPlayer];

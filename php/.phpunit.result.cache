@@ -1,0 +1,1 @@
+{"version":1,"defects":{"BoardTest::testSetMovementOnBoard":7},"times":{"BoardTest::testInitializeBoard":0.02,"BoardTest::testSetMovementOnBoard":0.002,"BoardTest::testCheckWin":0.001}}

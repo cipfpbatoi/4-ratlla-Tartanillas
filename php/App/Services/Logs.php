@@ -12,14 +12,14 @@ Class Logs {
     }
 
     public function getLog() {
-    	return $this->log;
+        return $this->log;
     }
 
     /**
     * @param $log
     */
     public function setLog($log) {
-    	$this->log = $log;
+        $this->log = $log;
     }
 }
 ?>
