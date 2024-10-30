@@ -1,43 +1,46 @@
-.correct {
-    color: green;
+* {
+    margin: 0 auto;
+    text-align: center;
 }
-.incorrect {
-    color: red;
+body {
+    background-color: black;
 }
-
 table {
     border-collapse: collapse;
+    margin: 20px auto;
 }
 
 td {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    border: 10px dotted #fff;
+    border: 10px dotted black;
     /* Cercle amb punts blancs */
-    background-color: #000;
+    background-color: white;
     /* Fons negre o pot ser un altre color */
     display: inline-block;
     margin: 10px;
-    color: white;
+    color: black;
     font-size: 2rem;
     text-align: center;
     vertical-align: middle;
 }
-
-.player1 {
-    background-color: red;
-    /* Color vermell per un dels jugadors */
+input {
+    background-color: black;
+    color: white;
+    border: 1px solid white;
+    border-radius: 10px;
+    padding: 6px 12px;
 }
-
-.player2 {
-    background-color: yellow;
-    /* Color groc per l'altre jugador */
+input:hover {
+    background-color: white;
+    color: black;
+    transition: all 0.5s ease;
 }
 
 .buid {
-    background-color: white;
+    background-color: black;
     /* Color blanc per cercles buits */
-    border-color: #000;
+    border-color: white;
     /* Puntes negres per millor visibilitat */
 }
