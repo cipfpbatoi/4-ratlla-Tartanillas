@@ -4,23 +4,24 @@
     <link rel="stylesheet" href="styles.css?v=<?php echo time(); ?>">
     <title>4 en ratlla</title>
     <style>
-        .player1 {
-            background-color: <?= $players[1]->getColor() ?> ; /* Color vermell per un dels jugadors */
+        td.player1 {
+            background-color: <?php echo $players[1]->getColor(); ?>;
+            border: 5px solid <?php echo $players[1]->getColor(); ?>;
         }
 
-        .player2 {
-            background-color:  <?= $players[2]->getColor() ?>; /* Color groc per l'altre jugador */
+        td.player2 {
+            background-color: <?php echo $players[2]->getColor(); ?>;
+            border: 5px solid <?php echo $players[2]->getColor(); ?>;
         }
-
     </style>
 </head>
 <body>
 <?php include_once $_SERVER['DOCUMENT_ROOT'].'/../Views/error.view.php'  ?>
- <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
     <?php include_once $_SERVER['DOCUMENT_ROOT'].'/../Views/board.view.php'  ?>
-     <input type="submit" name="reset" value="Reiniciar joc">
-     <input type="submit" name="exit" value="Acabar joc">
+    <input type="submit" name="reset" value="Reiniciar joc">
+    <input type="submit" name="exit" value="Acabar joc">
 </form>
- <?php include_once $_SERVER['DOCUMENT_ROOT'].'/../Views/panel.view.php'  ?>
+<?php include_once $_SERVER['DOCUMENT_ROOT'].'/../Views/panel.view.php'  ?>
 </body>
 </html>
