@@ -4,10 +4,9 @@ use PHPUnit\Framework\TestCase;
     class BoardTest extends TestCase {
         private $board;
 
-        // Método setUp se ejecuta antes de cada prueba
         protected function setUp(): void {
-        $this->board = new Board();
-    }
+            $this->board = new Board();
+        }
 
         public function testInitializeBoard(): void {
             $this->assertIsArray($this->board->getSlots());

@@ -2,7 +2,7 @@
 
 namespace Joc4enRatlla\Controllers;
 
-use Exception;
+use Joc4enRatlla\Exceptions\ColumnaLlenaException;
 use Joc4enRatlla\Models\Player;
 use Joc4enRatlla\Models\Game;
 use Joc4enRatlla\Services\Logs;
@@ -26,6 +26,18 @@ public function __construct($request=null) {
 }
 
 public function play(Array $request)  {
+    if (isset($request['reset'])) {
+        $this->game->reset();
+        $this->game->save();
+    }
+    
+    if (isset($request['exit'])) {
+        unset($_SESSION['game']);
+        session_destroy();
+        header("location:/index.php");
+        exit();
+    }
+
     if (!$this->game->getBoard()->isFull() && !$this->game->getWinner()) {
         $jugadorActual = $this->game->getPlayers()[$this->game->getNextPlayer()];
         $log = new Logs();
@@ -40,26 +52,15 @@ public function play(Array $request)  {
                     $log->getLog()->info("La máquina introduce una ficha en la columna: " . $columnaAutomatica);
                     $this->game->save();
                 }
-            } catch(Exception $err) {
-                $log->getLog()->error("Error, columna ". $request['columna']);
+            } catch(ColumnaLlenaException $err) {
+                echo "<span class='incorrect'>" . $err->getMessage() . "</span>";
+                $log->getLog()->error($err->getMessage());
             }
         } elseif ($jugadorActual->getIsAutomatic()) {
             $columnaAutomatica = $this->game->playAutomatic();
             $log->getLog()->info("La máquina introduce una ficha en la columna: " . $columnaAutomatica);
             $this->game->save();
         }
-    }
-
-    if (isset($request['reset'])) {
-        $this->game->reset();
-        $this->game->save();
-    }
-    
-    if (isset($request['exit'])) {
-        unset($_SESSION['game']);
-        session_destroy();
-        header("location:/index.php");
-        exit();
     }
     
     $board = $this->game->getBoard();

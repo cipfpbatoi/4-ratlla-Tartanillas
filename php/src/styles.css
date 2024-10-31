@@ -3,7 +3,9 @@
     padding: 0;
     box-sizing: border-box;
 }
-
+.incorrect {
+    color: red;
+}
 body {
     background-color: #121212;
     color: #f0f0f0;
