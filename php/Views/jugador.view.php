@@ -9,10 +9,10 @@
 <body>
     <h1>Formulario</h1>
     <form action="#" method="post">
-        <label for="name">Nombre:</label>
+        <label for="name">Nombre</label>
         <input type="text" id="name" name="name" required><br><br>
 
-        <label for="color">Elige un color:</label>
+        <label for="color">Elige un color</label>
         <select id="color" name="color">
             <option value="red">Rojo</option>
             <option value="orange">Naranja</option>
