@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
-    <h1>Formulario</h1>
+    <h1 class="formTitulo">Formulario</h1>
     <form action="#" method="post">
         <label for="name">Nombre</label>
         <input type="text" id="name" name="name" required><br><br>
