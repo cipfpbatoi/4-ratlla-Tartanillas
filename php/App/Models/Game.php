@@ -129,15 +129,19 @@ class Game {
         $this->save();
     }
 
-    public function restoreGame() {
+    public static function restoreGame() {
         $sql = "SELECT game FROM partides WHERE usuari_id = :usuario_id";
         $pdo = Db::connect();
         $sentence = $pdo->prepare($sql);
         $sentence->bindParam(':usuario_id', $_SESSION['usuarioId']);
         $sentence->execute();
         $partida = $sentence->fetch();
-        $_SESSION['game'] = $partida['game'];
-        $this->restore();
+    
+        if ($partida) {
+            $_SESSION['game'] = $partida['game'];
+        }
+
+        return unserialize($_SESSION['game'], [Game::class]);
     }
 }
 ?>

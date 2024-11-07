@@ -36,10 +36,18 @@ public function play(Array $request)  {
     }
 
     if(isset($request['restoreGame'])) {
-        $this->game->restoreGame();
+        $this->game = Game::restoreGame();
+        $this->game->save();
     }
 
     if (isset($request['exit'])) {
+        unset($_SESSION['usuarioId']);
+        session_destroy();
+        header("location:/login.php");
+        exit();
+    }
+
+    if (isset($request['exitGame'])) {
         unset($_SESSION['game']);
         session_destroy();
         header("location:/index.php");
