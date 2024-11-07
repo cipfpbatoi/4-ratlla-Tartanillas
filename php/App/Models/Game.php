@@ -3,6 +3,7 @@ namespace Joc4enRatlla\Models;
 use Joc4enRatlla\Exceptions\ColumnaLlenaException;
 use Joc4enRatlla\Models\Board;
 use Joc4enRatlla\Models\Player;
+use Joc4enRatlla\Services\Db;
 
 class Game {
     private Board $board;
@@ -115,6 +116,28 @@ class Game {
     */
     public function getNextPlayer(): int {
         return $this->nextPlayer;
+    }
+
+    public function saveGame() {
+        $sql = "INSERT INTO partides (usuari_id, game) VALUES (:usuario_id, :game) ON DUPLICATE KEY UPDATE game = :game";
+        $pdo = Db::connect();
+        $sentence = $pdo->prepare($sql);
+        $sentence->bindParam(':usuario_id', $_SESSION['usuarioId']);
+        $sentence->bindParam(':game', $_SESSION['game']);
+        $sentence->execute();
+
+        $this->save();
+    }
+
+    public function restoreGame() {
+        $sql = "SELECT game FROM partides WHERE usuari_id = :usuario_id";
+        $pdo = Db::connect();
+        $sentence = $pdo->prepare($sql);
+        $sentence->bindParam(':usuario_id', $_SESSION['usuarioId']);
+        $sentence->execute();
+        $partida = $sentence->fetch();
+        $_SESSION['game'] = $partida['game'];
+        $this->restore();
     }
 }
 ?>

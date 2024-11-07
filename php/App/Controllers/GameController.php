@@ -31,6 +31,14 @@ public function play(Array $request)  {
         $this->game->save();
     }
     
+    if(isset($request['saveGame'])) {
+        $this->game->saveGame();
+    }
+
+    if(isset($request['restoreGame'])) {
+        $this->game->restoreGame();
+    }
+
     if (isset($request['exit'])) {
         unset($_SESSION['game']);
         session_destroy();

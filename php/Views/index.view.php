@@ -18,8 +18,11 @@
 <body>
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
     <?php include_once $_SERVER['DOCUMENT_ROOT'].'/../Views/board.view.php'  ?>
-    <input type="submit" name="reset" value="Reiniciar joc">
-    <input type="submit" name="exit" value="Acabar joc">
+    <input type="submit" name="reset" value="Reiniciar juego">
+    <input type="submit" name="exitGame" value="Salir del juego">
+    <input type="submit" name="exit" value="Cerrar sesión"><br>
+    <input type="submit" name="saveGame" value="Guardar partida">
+    <input type="submit" name="restoreGame" value="Cargar partida">
 </form>
 <?php include_once $_SERVER['DOCUMENT_ROOT'].'/../Views/panel.view.php'  ?>
 </body>
