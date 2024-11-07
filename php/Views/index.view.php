@@ -16,7 +16,6 @@
     </style>
 </head>
 <body>
-<?php include_once $_SERVER['DOCUMENT_ROOT'].'/../Views/error.view.php'  ?>
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
     <?php include_once $_SERVER['DOCUMENT_ROOT'].'/../Views/board.view.php'  ?>
     <input type="submit" name="reset" value="Reiniciar joc">
