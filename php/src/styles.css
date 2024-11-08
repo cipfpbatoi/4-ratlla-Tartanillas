@@ -39,7 +39,7 @@ label {
     color: var(--color-azul);
 }
 
-input[type="text"], select {
+input[type="text"], input[type="password"], select {
     width: 100%;
     padding: 10px;
     margin-bottom: 20px;

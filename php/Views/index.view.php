@@ -20,9 +20,11 @@
     <?php include_once $_SERVER['DOCUMENT_ROOT'].'/../Views/board.view.php'  ?>
     <input type="submit" name="reset" value="Reiniciar juego">
     <input type="submit" name="exitGame" value="Salir del juego">
-    <input type="submit" name="exit" value="Cerrar sesión"><br>
+    <br><br>
     <input type="submit" name="saveGame" value="Guardar partida">
     <input type="submit" name="restoreGame" value="Cargar partida">
+    <br><br>
+    <input type="submit" name="exit" value="Cerrar sesión"><br>
 </form>
 <?php include_once $_SERVER['DOCUMENT_ROOT'].'/../Views/panel.view.php'  ?>
 </body>
